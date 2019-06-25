@@ -1,3 +1,6 @@
+## 服务器ip地址
+120.79.46.144:3000
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
