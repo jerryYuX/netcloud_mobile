@@ -2,9 +2,16 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+// ant-ui　try
+import {
+  Button
+} from 'antd-mobile';
+import 'antd-mobile/dist/antd-mobile.css';
+
 function App() {
   return (
     <div className="App">
+      <Button>Ant UI Try</Button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
