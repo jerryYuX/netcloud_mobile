@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import SearchBarExample from './containers/SearchContainer' 
 // ant-ui　try
 import {
   Button
@@ -11,7 +11,8 @@ import 'antd-mobile/dist/antd-mobile.css';
 function App() {
   return (
     <div className="App">
-      <Button>Ant UI Try</Button>
+      <SearchBarExample></SearchBarExample>
+      {/* <Button>Ant UI Try</Button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -25,7 +26,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
     </div>
   );
 }
