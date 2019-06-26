@@ -2,13 +2,6 @@ import React from 'react';
 import Remditem from './Remditem';
 import { Grid, Icon } from 'antd-mobile';
 import './Remdlist.css';
-const list = [
-  'check-circle', 'check', 'check-circle-o',
-  'cross-circle', 'cross', 'cross-circle-o',
-  'up', 'down', 'left',
-  'right', 'ellipsis',
-  'loading',
-];
 
 export default class Remdlist extends React.Component {
   constructor(props) {
@@ -17,10 +10,11 @@ export default class Remdlist extends React.Component {
   render() {
     let props = this.props;
 
-    const data = list.map(item => ({
+    const data = props.list.map(item => ({
       icon: (<Remditem/>),
       text: item,
     }));
+    
     return (
       <Grid
         data = { data }
