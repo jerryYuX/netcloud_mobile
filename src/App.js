@@ -5,9 +5,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './components/home/home.js'
 import Login from './components/login/login'
 // ant-ui　try
-import {
-  Button
-} from 'antd-mobile';
 import 'antd-mobile/dist/antd-mobile.css';
 
 function App() {
