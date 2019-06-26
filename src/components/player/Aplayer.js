@@ -27,7 +27,7 @@ class Aplay extends Component {
         let options = {
             container: player,
             mini: false,
-            autoplay: true,
+            autoplay: false,
             theme: '#FADFA3',
             loop: 'all',
             order: 'random',

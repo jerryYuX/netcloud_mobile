@@ -6,8 +6,8 @@ function Header(props) {
         <div className={'header'}>
             <h1>
                 <svg className="topsvg" viewBox="0 0 1238 231" xmlns="http://www.w3.org/2000/svg">
-                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="logo_white" fill-rule="nonzero">
+                    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                        <g id="logo_white" fillRule="nonzero">
                             <g id="Group" transform="translate(288.000000, 31.000000)" fill="#FFFFFF">
                                 <path
                                     d="M225.14,75.724 L343.119,75.724 C346.655,75.724 349.523,72.856 349.523,69.319 L349.523,13.42 C349.523,9.882 346.656,7.014 343.119,7.014 L225.14,7.014 C221.603,7.014 218.736,9.882 218.736,13.42 L218.736,69.319 C218.736,72.856 221.603,75.724 225.14,75.724 Z M234.881,19.827 L333.513,19.827 L333.513,34.964 L234.881,34.964 L234.881,19.827 Z M234.881,47.775 L333.513,47.775 L333.513,62.913 L234.881,62.913 L234.881,47.775 Z"

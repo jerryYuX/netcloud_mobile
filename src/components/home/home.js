@@ -26,7 +26,7 @@ class Home extends Component{
     }
     renderContent = tab =>{
         if(tab.key == 1){
-            return (<div style={{style}}>
+            return (<div style={style}>
                     <Recommend  ></Recommend>
                 </div>
 
