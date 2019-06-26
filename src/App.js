@@ -12,10 +12,7 @@ import Recommend from './components/recommend/index';
 function App() {
   return (
     <div className="App">
-      <div className="App">
-        <SearchBarExample></SearchBarExample>
-        
-      </div>
+      
       <Recommend></Recommend>
       <Router>
           <Switch>

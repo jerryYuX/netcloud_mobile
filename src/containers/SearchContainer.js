@@ -2,8 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import MySearchBar from '../components/search/MySearchBar'
 import HotSearch from '../components/hotSearch/HotSearch'
-import {queryAction,clearSearchAction,finSearchAction} from '../store/action'
-import {getHotSearch} from '../api/hotSeatch'
+import Msgitem from '../components/common/Msgitem'
+import {
+  queryAction,
+  clearSearchAction,
+  finSearchAction,
+  increaseUpdateSearchAction,
+  noResultAction,
+} from '../store/action'
+import {getHotSearch,searchResult} from '../api/hotSeatch'
+import { PullToRefresh } from 'antd-mobile';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import './SearchContainer.css'
 // class SearchBarExample extends React.Component {
@@ -11,55 +19,98 @@ import './SearchContainer.css'
     
 //    }
 // }
-const SearchBarExample =({ query,list,handleClick, clear, search }) => (
-  <div className="page">
-      <div className="top">
-           <MySearchBar query={query} onClear={clear} onChange={search}></MySearchBar>
-      </div>
-      <div className="bottom">
-           <HotSearch list={list} handleClick={handleClick}></HotSearch>
+// const SearchBarExample =({ query,list,handleClick, clear, search }) => (
+//   <div className="page">
+//       <div className="top">
+//            <MySearchBar query={query} onClear={clear} onChange={search}></MySearchBar>
+//       </div>
+//       <div className="bottom">
+//            <HotSearch list={list} handleClick={handleClick}></HotSearch>
            
-      </div>
-  </div>
-);
+//       </div>
+//   </div>
+// );
 const mapStateToProps=(state)=>{
   return {
     query:state.search.query,
-    list:[],
-    loading:state.search.loading
+    result:state.search.result,
+    loading:state.search.loading,
+    searchFin:state.search.searchFin,
+    noresult:state.search.noresult
   }
 }
 const search = (value)=>(dispatch, getState) =>{
+  let state=getState();
+  console.log(state)
+  let limit=state.search.limit;
+  let offset=state.search.offset;
   dispatch(queryAction(value))
+  if(value){
+    searchResult(value).then(res=>{
+        if(res.result.songs){
+          dispatch(finSearchAction(res.result.songs,limit,offset))
+        }else{
+          dispatch(noResultAction())
+        }
+    })
+  }
   // dispatch({
   // })
 }
-const handleClick=(val)=>(dispatch,getState)=>{
-  console.log(val)
+const handleClick=(event)=>(dispatch,getState)=>{
+  let value=event.target.innerText
+  search(value)(dispatch,getState)//连续箭头函数传参 
 }
 const clear=()=>(dispatch, getState) =>{
-  setTimeout(()=>{
+  new Promise((a,b)=>{
+    a()
+  }).then(()=>{
     dispatch(clearSearchAction())
-  },500)
+  })
 }
-
+const increaseUpdate=()=>(dispatch, getState)=>{
+  let state=getState();
+  let value=state.search.query
+  let limit=state.search.limit;
+  let offset=state.search.offset+limit;
+  searchResult(value,limit,offset).then(res=>{
+      dispatch(increaseUpdateSearchAction(res.result.songs,limit,offset))
+  })
+  
+}
+const ETL =(datas)=>{
+  if(datas){
+    return datas.map(data=>{
+      let ETL_data={};
+      console.log(data)
+      ETL_data.musicName=data.name;
+      ETL_data.singerName=data.artists[0].name;
+      ETL_data.albumName=data.album.name;
+      ETL_data.id=data.id;
+      return ETL_data;
+    })
+  }
+  return []
+}
 class SearchContainer extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
       list:[],
+      height:0
     };
   }
   componentDidMount() {
     getHotSearch().then((res)=>{
       console.log(res.result)
       this.setState({
-        list:res.result.hots
+        list:res.result.hots,
+        height:document.querySelector('.page').clientHeight-document.querySelector('.top').clientHeight
       })
     })
   }
   render(){
-    const { query,list,loading,handleClick, clear, search } = this.props
+    const { query,result,loading,noresult,searchFin,handleClick,increaseUpdate, clear, search } = this.props
     
     return (
       <div className="page">
@@ -67,7 +118,19 @@ class SearchContainer extends React.Component{
               <MySearchBar query={query} onClear={clear} onChange={search}></MySearchBar>
           </div>
           <div className="bottom">
-              <HotSearch className={!loading?"show":"hidden"} list={this.state.list} handleClick={handleClick}></HotSearch>
+              <HotSearch className={(!loading)&&(!searchFin)&&(!noresult)?"show":"hidden"} list={this.state.list} handleClick={handleClick}></HotSearch>
+              <PullToRefresh style={{ height: this.state.height,overflow: 'auto',}} direction="up" onRefresh={increaseUpdate} className={searchFin?"show":"hidden"}>
+                <div className="listView">
+                  {ETL(result).map(item=>{
+                    return (<Msgitem key={item.id} data={item} clickHandle={(e)=>{console.log(e)}}></Msgitem>)
+                  })}
+                </div>
+              </PullToRefresh>
+              <div className={noresult?"show":"hidden"}>
+                <div className="noresult">
+                  <span>暂无搜索结果</span>
+                </div>
+              </div>
               <div className="loading"><ScaleLoader color={'#d43c33'} loading={loading}></ScaleLoader></div>
           </div>
       </div>
@@ -77,5 +140,5 @@ class SearchContainer extends React.Component{
 
 export default connect(
   mapStateToProps,
-  { search,clear }
+  { search,clear,handleClick,increaseUpdate }
 )(SearchContainer)

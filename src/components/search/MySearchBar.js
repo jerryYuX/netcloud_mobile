@@ -6,7 +6,7 @@ const MySearchBar=({query,onChange,onClear})=>{
     return (
         <div>
             <WhiteSpace size="lg"/>
-            <SearchBar value={query} placeholder="Search" maxLength={8} onClear={onClear} onChange={onChange} />
+            <SearchBar value={query} placeholder="Search" maxLength={15} onClear={onClear} onChange={onChange} />
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import { createStore, combineReducers ,applyMiddleware} from 'redux'
 import {loginAction,saveLoginInfoAction} from './action.js'
 import * as actions from './action'
+import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 const middleware = [ thunk ];
 // function visibilityFilter(state = 'SHOW_ALL', action) {
@@ -22,27 +23,61 @@ function login(state = {}, action) {
   }
 let initSearchState={
   query:'',
-  loading:false
+  loading:false,
+  result:[],
+  limit:10,
+  offset:0,
+  searchFin:false,
+  noresult:false
 }
   function search(state=initSearchState,action){
     switch(action.type){
       case actions.SEARCH_QUERY:
-        return Object.assign({},state,{
-          query:action.query,
-          loading:true
-        })
-      case actions.CLEAR_SEARCH_ACTION:
-        return {
-          query:"",
-          loading:false
+        if(action.query){
+          return Object.assign({},state,{
+            query:action.query,
+            loading:true,
+            searchFin:false
+          })
+        }else{
+          return Object.assign({},state,{
+            query:action.query,
+            loading:false,
+            searchFin:false
+          })
         }
-        // return Object.assign({},state,{
-        //   query:"",
-        //   loading:false
-        // })
+        
+      case actions.CLEAR_SEARCH_ACTION:
+          return Object.assign({},state,{
+            query:"",
+            loading:false,
+            searchFin:false,
+            offset:0,
+            noresult:false
+          })
+      case actions.INCREASE_UPDATE_SEARCH:
+        console.log(state,action)
+        return Object.assign({},state,{
+          loading:false,
+          result:state.result.concat(action.result),
+          limit:action.limit,
+          offset:action.offset,
+          searchFin:true,
+          noresult:false
+        })
       case actions.SEARCH_QUERY_FIN:
         return Object.assign({},state,{
-          loading:false
+          loading:false,
+          result:action.result,
+          limit:action.limit,
+          offset:action.offset,
+          searchFin:true,
+          noresult:false
+        })
+      case actions.NO_RESULT:
+        return Object.assign({},state,{
+          loading:false,
+          noresult:true
         })
       default:
       return state
@@ -51,6 +86,9 @@ let initSearchState={
 // 创建 Redux store 来存放应用的状态。
 // API 是 { subscribe, dispatch, getState }。
 let reducer=combineReducers({login,search})
+if (process.env.NODE_ENV !== 'production') {
+  middleware.push(createLogger());
+}
 const store = createStore(
   reducer,
   applyMiddleware(...middleware)

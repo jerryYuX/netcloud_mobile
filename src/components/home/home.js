@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import Header from '../header/header'
 import Hot_song from '../hotSong/hot_song'
 import Aplayer from '../player/Aplayer'
+import SearchContainer from '../../containers/SearchContainer'
 const tabs = [
     { title: <Badge text={'3'}>推荐音乐</Badge>,key:1 },
     { title: <Badge text={'今日(20)'}>热歌榜</Badge>,key:2 },
@@ -30,7 +31,7 @@ class Home extends Component{
             return (<div style={style}><Hot_song/></div>)
         }
         if(tab.key == 3){
-            return (<div style={style}>zujian3</div>)
+            return (<SearchContainer></SearchContainer>)
         }
     };
 
