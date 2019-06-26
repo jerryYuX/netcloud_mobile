@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd-mobile": "^2.2.14",
+    "aplayer": "^1.10.1",
     "react": "^16.8.6",
     "react-aplayer": "^1.0.0",
     "react-dom": "^16.8.6",
