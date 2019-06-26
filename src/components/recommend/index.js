@@ -2,16 +2,7 @@ import React from 'react';
 import './index.css';
 import Remdlist from './Remdlist';
 import Msgitem from '../common/Msgitem';
-import { getNewSong } from '../../api/recommend';
-
-// ce shi
-const list = [
-  'check-circle', 'check', 'check-circle-o',
-  'cross-circle', 'cross', 'cross-circle-o',
-  'up', 'down', 'left',
-  'right', 'ellipsis',
-  'loading',
-];
+import { getNewSong, getRemdListData } from '../../api/recommend';
 
 export default class Recommend extends React.Component {
   constructor(props) {
@@ -23,6 +14,7 @@ export default class Recommend extends React.Component {
   }
   componentDidMount() {
     this.fetchNewSon();
+    this.fetchRemdListData();
   }
   
   fetchNewSon() {
@@ -32,21 +24,33 @@ export default class Recommend extends React.Component {
           newSongList: data.result.map((item, idx, arr)=> {
             // mark
             let data = {
-              title: item.song.name,
-              description: `${item.song.artists.name} - ${item.song.name}`,
-              isOrder: '',
-              order: '',
-              id:'',
+              musicName: item.song.name,
+              singerName: item.song.artists[0].name,
+              albumName: item.song.name,
+              id: item.song.id,
             };
-            return <Msgitem data={data} key={idx}></Msgitem>
+            return <Msgitem 
+              data={data} 
+              key={idx}
+              clickHandle={function(){console.log(this)}}
+              ></Msgitem>
           })    
         })
       }
     })
   }
-  fetchRemdList() {
-    
+  
+  fetchRemdListData() {
+    getRemdListData().then((data) => {
+      if(data.code === 200) {
+        this.setState({
+          remdListData: data.result
+        })
+      }
+    })
   }
+  
+  
   render() {
     return (
       <div className="remd-wrap">
@@ -54,7 +58,7 @@ export default class Recommend extends React.Component {
         <div className="remd-wrap">
           <h2 className="remd-title">推荐歌单</h2>
           <div className="remd-list">
-            <Remdlist list={list}></Remdlist>
+            <Remdlist data={this.state.remdListData}></Remdlist>
           </div>
         </div>
         
