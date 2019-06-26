@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import MySearchBar from '../components/search/MySearchBar'
 import HotSearch from '../components/hotSearch/HotSearch'
-import {queryAction,clearSearchAction} from '../store/action'
+import {queryAction,clearSearchAction,finSearchAction} from '../store/action'
 import {getHotSearch} from '../api/hotSeatch'
+import ScaleLoader from 'react-spinners/ScaleLoader';
 import './SearchContainer.css'
 // class SearchBarExample extends React.Component {
 //   render({ query, clear, search }) {
@@ -17,13 +18,15 @@ const SearchBarExample =({ query,list,handleClick, clear, search }) => (
       </div>
       <div className="bottom">
            <HotSearch list={list} handleClick={handleClick}></HotSearch>
+           
       </div>
   </div>
 );
 const mapStateToProps=(state)=>{
   return {
     query:state.search.query,
-    list:[]
+    list:[],
+    loading:state.search.loading
   }
 }
 const search = (value)=>(dispatch, getState) =>{
@@ -35,13 +38,17 @@ const handleClick=(val)=>(dispatch,getState)=>{
   console.log(val)
 }
 const clear=()=>(dispatch, getState) =>{
-  dispatch(clearSearchAction())
+  setTimeout(()=>{
+    dispatch(clearSearchAction())
+  },500)
 }
 
 class SearchContainer extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {list:[]};
+    this.state = {
+      list:[],
+    };
   }
   componentDidMount() {
     getHotSearch().then((res)=>{
@@ -52,7 +59,7 @@ class SearchContainer extends React.Component{
     })
   }
   render(){
-    const { query,list,handleClick, clear, search } = this.props
+    const { query,list,loading,handleClick, clear, search } = this.props
     
     return (
       <div className="page">
@@ -60,7 +67,8 @@ class SearchContainer extends React.Component{
               <MySearchBar query={query} onClear={clear} onChange={search}></MySearchBar>
           </div>
           <div className="bottom">
-              <HotSearch list={this.state.list} handleClick={handleClick}></HotSearch>
+              <HotSearch className={!loading?"show":"hidden"} list={this.state.list} handleClick={handleClick}></HotSearch>
+              <div className="loading"><ScaleLoader color={'#d43c33'} loading={loading}></ScaleLoader></div>
           </div>
       </div>
     )

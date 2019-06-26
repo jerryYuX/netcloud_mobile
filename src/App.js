@@ -10,7 +10,7 @@ import 'antd-mobile/dist/antd-mobile.css';
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <div className="App">
         <SearchBarExample></SearchBarExample>
         

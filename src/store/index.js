@@ -20,17 +20,30 @@ function login(state = {}, action) {
         return state
     }
   }
-
-  function search(state="",action){
+let initSearchState={
+  query:'',
+  loading:false
+}
+  function search(state=initSearchState,action){
     switch(action.type){
       case actions.SEARCH_QUERY:
-      return Object.assign({},state,{
-        query:action.query
-      })
+        return Object.assign({},state,{
+          query:action.query,
+          loading:true
+        })
       case actions.CLEAR_SEARCH_ACTION:
-      return Object.assign({},state,{
-        query:""
-      })
+        return {
+          query:"",
+          loading:false
+        }
+        // return Object.assign({},state,{
+        //   query:"",
+        //   loading:false
+        // })
+      case actions.SEARCH_QUERY_FIN:
+        return Object.assign({},state,{
+          loading:false
+        })
       default:
       return state
     }

@@ -22,19 +22,19 @@ let arr=[
         name:'nihao'
     },
 ]
-const HotSearch=({list,handleClick})=>{
+const HotSearch=({list,handleClick,className})=>{
     return (
-        <div>
+        <div className={className}>
             <WingBlank><div className="sub-title">热门搜索</div></WingBlank>
-        <div className="tag-container">
-            {
-                list.map(item=>{
-                    return (
-                        <WingBlank key={item.first}><Button onClick={handleClick} key={item.first} size="small" inline>{item.first}</Button></WingBlank>
-                    )
-                })
-            }
-        </div>
+            <div className="tag-container">
+                {
+                    list.map(item=>{
+                        return (
+                            <WingBlank key={item.first}><Button onClick={handleClick} key={item.first} size="small" inline>{item.first}</Button></WingBlank>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }
