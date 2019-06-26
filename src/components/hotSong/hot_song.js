@@ -41,7 +41,6 @@ class Hot_song extends Component {
 
     render() {
         let items = [];
-        console.log(this.state.list);
         for(let i = 0;i<this.state.list.length;i++){
             items.push(<Msgitem data={this.state.list[i]} clickHandle={()=>'test'} />)
 
