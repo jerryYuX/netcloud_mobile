@@ -21,20 +21,7 @@ export default class Recommend extends React.Component {
     getNewSong().then((data) => {
       if(data.code === 200) {
         this.setState({
-          newSongList: data.result.map((item, idx, arr)=> {
-            // mark
-            let data = {
-              musicName: item.song.name,
-              singerName: item.song.artists[0].name,
-              albumName: item.song.name,
-              id: item.song.id,
-            };
-            return <Msgitem
-              data={data}
-              key={idx}
-              clickHandle={function(){console.log(this)}}
-              ></Msgitem>
-          })
+          newSongList: data.result
         })
       }
     })
@@ -52,10 +39,30 @@ export default class Recommend extends React.Component {
 
 
   render() {
+    let newSL = [];
+    let clickHandle = this.props.clickHandle ? this.props.clickHandle : (function(){})
+    if( this.state.newSongList ) {
+      newSL = this.state.newSongList.map((item, idx, arr)=> {
+        // mark
+        let data = {
+          musicName: item.song.name,
+          singerName: item.song.artists[0].name,
+          albumName: item.song.name,
+          id: item.song.id,
+        };
+        return <Msgitem 
+          data={data} 
+          key={idx}
+          clickHandle={clickHandle}
+          ></Msgitem>
+      }) 
+    }
+
     return (
-      <div className="remd-wrap">
+      <div className="remd-page-wrap">
         {/* 推荐音乐 */}
         <div className="remd-music-wrap">
+          <div className='pos'></div>
           <h2 className="remd-title">推荐歌单</h2>
           <div className="remd-list">
             <Remdlist data={this.state.remdListData}></Remdlist>
@@ -66,7 +73,7 @@ export default class Recommend extends React.Component {
         <div className="new-music-wrap">
           <h2 className="remd-title">最新音乐</h2>
           <div className="new-music-list">
-            {this.state.newSongList}
+            { newSL }
           </div>
         </div>
       </div>
