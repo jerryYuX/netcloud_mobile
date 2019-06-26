@@ -26,9 +26,9 @@ export default class Remditem extends React.Component {
         <div className='remd-img-wrap'>
           <img className='remd-img' src={ data.picUrl } alt="" />
         </div>
-        <div className='remd-text'>
-          <span>{data.title}</span>
-        </div>
+        <p className='remd-text'>
+          {data.title}
+        </p>
       </div>
     )
   }

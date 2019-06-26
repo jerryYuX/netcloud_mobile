@@ -2,6 +2,7 @@
   margin: -10px 0;
   padding-left: 8px !important;
   position: relative;
+  width: 100%;
 }
 .msg-float {
   float: left;
@@ -13,9 +14,18 @@
   min-height: 44px;
   line-height: 44px;
 }
-
+.msg-item-r {
+  
+}
+.msg-item-r .music-name {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  display: inline-block;
+}
 .icon {
-  background: url(//s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28…=) no-repeat;
+  background: url(../../assets/w_icon.png) no-repeat;
   background-size: 166px 97px;
   display: inline-block;
   margin-right: 3px;
