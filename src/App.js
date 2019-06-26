@@ -4,14 +4,17 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './components/home/home.js'
 import Login from './components/login/login'
+import SearchBarExample from './containers/SearchContainer' 
 // ant-ui　try
-import {
-  Button
-} from 'antd-mobile';
 import 'antd-mobile/dist/antd-mobile.css';
 
 function App() {
   return (
+    <div>
+      <div className="App">
+        {/* <SearchBarExample></SearchBarExample> */}
+        
+      </div>
       <Router>
           <Switch>
               <Route exact path="/" component={Home} />
@@ -19,6 +22,7 @@ function App() {
               <Route path="/login" component={Login} />
           </Switch>
       </Router>
+    </div>
   );
 }
 
