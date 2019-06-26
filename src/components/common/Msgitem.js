@@ -8,10 +8,14 @@ const sgIcon = <i className='icon sg-icon'></i>
 
 /**
  * 音乐ｉｔｅｍ
- * 传入　ｄａｔａ
- * data.title
- * data.description
- * data.order
+ * 传入data
+ {
+   title,
+   description,
+   isOrder,
+   order,
+   id,
+ };
  */
 export default class Msgitem extends React.Component {
   constructor(props) {
