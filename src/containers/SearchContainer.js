@@ -16,7 +16,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 import './SearchContainer.css'
 // class SearchBarExample extends React.Component {
 //   render({ query, clear, search }) {
-    
+
 //    }
 // }
 // const SearchBarExample =({ query,list,handleClick, clear, search }) => (
@@ -26,7 +26,7 @@ import './SearchContainer.css'
 //       </div>
 //       <div className="bottom">
 //            <HotSearch list={list} handleClick={handleClick}></HotSearch>
-           
+
 //       </div>
 //   </div>
 // );
@@ -59,7 +59,7 @@ const search = (value)=>(dispatch, getState) =>{
 }
 const handleClick=(event)=>(dispatch,getState)=>{
   let value=event.target.innerText
-  search(value)(dispatch,getState)//连续箭头函数传参 
+  search(value)(dispatch,getState)//连续箭头函数传参
 }
 const clear=()=>(dispatch, getState) =>{
   new Promise((a,b)=>{
@@ -76,7 +76,7 @@ const increaseUpdate=()=>(dispatch, getState)=>{
   searchResult(value,limit,offset).then(res=>{
       dispatch(increaseUpdateSearchAction(res.result.songs,limit,offset))
   })
-  
+
 }
 const ETL =(datas)=>{
   if(datas){
@@ -102,10 +102,7 @@ class SearchContainer extends React.Component{
   }
   componentDidMount() {
     getHotSearch().then((res)=>{
-      console.log(document.documentElement.clientHeight,
-        document.querySelector('[role="tablist"]').clientHeight,
-        document.querySelector('.header').clientHeight,
-        document.querySelector('.aplayer-body').clientHeight)
+      console.log(document.documentElement)
       this.setState({
         list:res.result.hots,
         height:document.documentElement.clientHeight
@@ -118,7 +115,7 @@ class SearchContainer extends React.Component{
   }
   render(){
     const { query,result,loading,noresult,searchFin,handleClick,increaseUpdate, clear, search } = this.props
-    
+
     return (
       <div className="page">
           <div className="top">

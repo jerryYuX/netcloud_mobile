@@ -30,6 +30,19 @@ let initSearchState={
   searchFin:false,
   noresult:false
 }
+let initListState={
+  list:[
+    {
+      name: 'name1',
+      artist: 'artist1',
+      url: '',
+      cover: '',
+      lrc: '',
+      theme: '#ebd0c2'
+    },
+
+  ]
+};
   function search(state=initSearchState,action){
     switch(action.type){
       case actions.SEARCH_QUERY:
@@ -46,7 +59,7 @@ let initSearchState={
             searchFin:false
           })
         }
-        
+
       case actions.CLEAR_SEARCH_ACTION:
           return Object.assign({},state,{
             query:"",
@@ -83,9 +96,21 @@ let initSearchState={
       return state
     }
   }
+  function list(state=initListState,action){
+    switch (action.Type) {
+      case actions.ADD_LIST:
+        return Object.assign({},state,{
+          list:action.list
+        })
+      default:
+        return state;
+
+    }
+
+  }
 // 创建 Redux store 来存放应用的状态。
 // API 是 { subscribe, dispatch, getState }。
-let reducer=combineReducers({login,search})
+let reducer=combineReducers({login,search,list})
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());
 }
