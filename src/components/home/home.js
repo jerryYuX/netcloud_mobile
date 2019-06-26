@@ -10,7 +10,7 @@ import Login from "../login/login";
 import PropTypes from 'prop-types';
 import Header from '../header/header'
 import Hot_song from '../hotSong/hot_song'
-import Aplayer from '../player/Aplayer'
+import PlayerContainer from '../../containers/playerContainer'
 import SearchContainer from '../../containers/SearchContainer'
 const tabs = [
     { title: <Badge text={'3'}>推荐音乐</Badge>,key:1 },
@@ -66,7 +66,7 @@ class Home extends Component{
                 >
                     {this.renderContent}
                 </Tabs>
-                <Aplayer audio={this.state.audio} />
+                <PlayerContainer audio={this.state.audio} />
 
 
 

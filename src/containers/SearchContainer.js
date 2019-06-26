@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { css } from '@emotion/core';
 import MySearchBar from '../components/search/MySearchBar'
 import HotSearch from '../components/hotSearch/HotSearch'
 import Msgitem from '../components/common/Msgitem'
@@ -12,11 +13,11 @@ import {
 } from '../store/action'
 import {getHotSearch,searchResult} from '../api/hotSeatch'
 import { PullToRefresh } from 'antd-mobile';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import { ScaleLoader } from 'react-spinners';
 import './SearchContainer.css'
 // class SearchBarExample extends React.Component {
 //   render({ query, clear, search }) {
-    
+
 //    }
 // }
 // const SearchBarExample =({ query,list,handleClick, clear, search }) => (
@@ -26,7 +27,7 @@ import './SearchContainer.css'
 //       </div>
 //       <div className="bottom">
 //            <HotSearch list={list} handleClick={handleClick}></HotSearch>
-           
+
 //       </div>
 //   </div>
 // );
@@ -59,7 +60,7 @@ const search = (value)=>(dispatch, getState) =>{
 }
 const handleClick=(event)=>(dispatch,getState)=>{
   let value=event.target.innerText
-  search(value)(dispatch,getState)//连续箭头函数传参 
+  search(value)(dispatch,getState)//连续箭头函数传参
 }
 const clear=()=>(dispatch, getState) =>{
   new Promise((a,b)=>{
@@ -76,7 +77,7 @@ const increaseUpdate=()=>(dispatch, getState)=>{
   searchResult(value,limit,offset).then(res=>{
       dispatch(increaseUpdateSearchAction(res.result.songs,limit,offset))
   })
-  
+
 }
 const ETL =(datas)=>{
   if(datas){
@@ -92,33 +93,34 @@ const ETL =(datas)=>{
   }
   return []
 }
+const style=css`
+    margin-left:${document.documentElement.clientWidth/2-20}px
+`;
 class SearchContainer extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
       list:[],
-      height:0
+      height:0,
+      width:0
     };
   }
   componentDidMount() {
     getHotSearch().then((res)=>{
-      console.log(document.documentElement.clientHeight,
-        document.querySelector('[role="tablist"]').clientHeight,
-        document.querySelector('.header').clientHeight,
-        document.querySelector('.aplayer-body').clientHeight)
+
       this.setState({
         list:res.result.hots,
         height:document.documentElement.clientHeight
         -document.querySelector('[role="tablist"]').clientHeight
         -document.querySelector('.top').clientHeight
         -document.querySelector('.header').clientHeight
-        -document.querySelector('.aplayer-body').clientHeight
+        -document.querySelector('.aplayer-body').clientHeight,
       })
     })
   }
   render(){
     const { query,result,loading,noresult,searchFin,handleClick,increaseUpdate, clear, search } = this.props
-    
+
     return (
       <div className="page">
           <div className="top">
@@ -132,14 +134,16 @@ class SearchContainer extends React.Component{
                     return (<Msgitem key={item.id} data={item} clickHandle={(e)=>{console.log(e)}}></Msgitem>)
                   })}
                 </div>
+
               </PullToRefresh>
               <div className={noresult?"show":"hidden"}>
                 <div className="noresult">
                   <span>暂无搜索结果</span>
                 </div>
               </div>
-              <div className="loading"><ScaleLoader color={'#d43c33'} loading={loading}></ScaleLoader></div>
+
           </div>
+          <div className="loading"><ScaleLoader css={style} color={'#d43c33'} loading={loading}></ScaleLoader></div>
       </div>
     )
   }

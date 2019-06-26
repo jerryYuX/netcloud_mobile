@@ -6,6 +6,7 @@ export const SEARCH_QUERY_FIN="SEARCH_QUERY_FIN"
 export const CLEAR_SEARCH_ACTION="CLEAR_SEARCH_ACTION"
 export const INCREASE_UPDATE_SEARCH="INCREASE_UPDATE_SEARCH"
 export const NO_RESULT="NO_RESULT"
+export const ADD_LIST="ADD_LIST"
 let loginAction=user=>{
     return { type: LOGIN_ACTION ,user:user}
 }
@@ -14,7 +15,7 @@ let saveLoginInfoAction=info=>{
 }
 
 let queryAction=query=>{
-    
+
     return {type:SEARCH_QUERY,query:query,loading:true}
 }
 
@@ -31,6 +32,13 @@ let noResultAction=()=>{
 let increaseUpdateSearchAction=(result,limit,offset)=>{
     return {type:INCREASE_UPDATE_SEARCH,result:result,limit:limit,offset:offset}
 }
+
+let addListAction = (lists)=>{
+    return {
+        type:ADD_LIST,
+        list:lists
+    }
+}
 export {
     loginAction,
     saveLoginInfoAction,
@@ -38,5 +46,6 @@ export {
     clearSearchAction,
     finSearchAction,
     increaseUpdateSearchAction,
-    noResultAction
+    noResultAction,
+    addListAction
 }
