@@ -21,7 +21,7 @@ const sgIcon = <i className='icon sg-icon'></i>
 export default class Msgitem extends React.Component {
   constructor(props) {
     super(props);
-    this.clickHandle = props.clickHandle;
+    this.clickHandle = props.clickHandle ? props.clickHandle :(function(){});
   }
   
   
