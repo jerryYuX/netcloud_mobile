@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './components/home/home.js'
 import Login from './components/login/login'
-import SearchBarExample from './containers/SearchContainer'
+import SearchContainer from './containers/SearchContainer'
 // ant-ui　try
 import 'antd-mobile/dist/antd-mobile.css';
 
