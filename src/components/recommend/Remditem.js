@@ -1,5 +1,13 @@
 import React from 'react';
 
+/*
+ * 传入　data:
+ *   {
+ *     icon,
+ *     title,
+ *     number, -- 序号
+ *   }
+ */
 export default class Remditem extends React.Component {
   constructor(props) {
     super(props);
@@ -9,16 +17,15 @@ export default class Remditem extends React.Component {
   }
   render() {
     let data = this.props.data;
-    data.title = 'title';
-    data.number = '播放量';
-    data.icon = 'http://p2.music.126.net/Kqc6NLGm8uCyvo1b0cfFNQ==/109951164171001799.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp';
     return (
       <div
         className='remd-item'
         onClick={this.clickHandle.bind(this)}
         >
-        <span　className='u-earp remd-lnum'>{data.number}</span>
-        <img className='remd-img' src={ data.icon } alt="" />
+        <span　className='u-earp remd-lnum'>{data.playCount}</span>
+        <div className='remd-img-wrap'>
+          <img className='remd-img' src={ data.picUrl } alt="" />
+        </div>
         <div className='remd-text'>
           <span>{data.title}</span>
         </div>

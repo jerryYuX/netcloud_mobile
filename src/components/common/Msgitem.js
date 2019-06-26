@@ -8,27 +8,27 @@ const sgIcon = <i className='icon sg-icon'></i>
 
 /**
  * 音乐ｉｔｅｍ
- * 传入data
+ (1) * 传入data
  {
-   title,
-   description,
-   isOrder,
-   order,
+   musicName,
+   singerName,
+   albumName,
    id,
+   order,
  };
+ (2) clickHandle
  */
 export default class Msgitem extends React.Component {
   constructor(props) {
     super(props);
+    this.clickHandle = props.clickHandle;
   }
-  // title description
-  clickHandle() {
-    console.log(this)
-  }
+  
+  
   render() {
     let data = this.props.data;
     let order = '';
-    if(data.isOrder) {
+    if(data.order) {
       order = <div className='msg-item-l msg-float'>{data.order}</div>
     }
     return (
@@ -41,9 +41,9 @@ export default class Msgitem extends React.Component {
       >
         {order}
         <div className='msg-item-r msg-float'>
-          {data.title}
+          {data.musicName}
           <List.Item.Brief style={{fontSize: '12px', marginTop: 0}}>
-            {sgIcon}{data.description}
+            {sgIcon}{`${data.singerName} - ${data.albumName}`}
           </List.Item.Brief>
         </div>
       </List.Item>
