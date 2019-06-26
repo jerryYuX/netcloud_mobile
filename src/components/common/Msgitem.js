@@ -28,7 +28,9 @@ export default class Msgitem extends React.Component {
   render() {
     let data = this.props.data;
     let order = '';
+    let msgFlotRWidth = 'calc(100% - 45px)';
     if(data.order) {
+      msgFlotRWidth = 'calc(100% - 85px)';
       order = <div 
         className='msg-item-l msg-float'
         style={{
@@ -52,8 +54,8 @@ export default class Msgitem extends React.Component {
         activeStyle={false}
       >
         {order}
-        <div className='msg-item-r msg-float'>
-          {data.musicName}
+        <div className='msg-item-r msg-float' style={{width: msgFlotRWidth}}>
+          <span className='music-name'>{data.musicName}</span>
           <List.Item.Brief style={{fontSize: '12px', marginTop: 0}}>
             {sgIcon}{`${data.singerName} - ${data.albumName}`}
           </List.Item.Brief>

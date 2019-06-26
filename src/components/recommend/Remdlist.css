@@ -24,8 +24,14 @@
   width: 100%;
 }
 .remd-item .remd-text {
-  color: #888;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding: 6px 2px 0 6px;
+  min-height: 30px;
+  line-height: 1.2;
   font-size: 13px;
-  margin-top: 3px;
-  color: #333;
+}
+.remd-item .remd-text span {
 }
