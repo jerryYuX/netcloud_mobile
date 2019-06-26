@@ -4,16 +4,19 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './components/home/home.js'
 import Login from './components/login/login'
-import SearchBarExample from './containers/SearchContainer' 
+import SearchBarExample from './containers/SearchContainer'
 // ant-ui　try
 import 'antd-mobile/dist/antd-mobile.css';
-import Recommend from './components/recommend/index';
+
 
 function App() {
   return (
-    <div className="App">
-      
-      <Recommend></Recommend>
+    <div style={{height:'100%'}}>
+      {/*<div className="App">*/}
+      {/*  /!* <SearchBarExample></SearchBarExample> *!/*/}
+
+      {/*</div>*/}
+
       <Router>
           <Switch>
               <Route exact path="/" component={Home} />

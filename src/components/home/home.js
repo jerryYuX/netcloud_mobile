@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import 'antd-mobile/dist/antd-mobile.css';
 import './home.css'
+import Recommend from '../recommend/index';
 import { BrowserRouter as Router, Route, Switch,Redirect } from "react-router-dom";
 import { Flex, WhiteSpace ,Button} from 'antd-mobile';
 import { Tabs, Badge } from 'antd-mobile';
@@ -17,7 +18,7 @@ const tabs = [
     { title: <Badge dot>搜索</Badge>,key:3 },
 ];
 
-const style = { backgroundColor: '#fff'}
+const style = { height: document.documentElement.clientHeight - 249, backgroundColor: '#fff' ,marginBottom:'68px'}
 
 class Home extends Component{
     static contextTypes = {
@@ -25,7 +26,11 @@ class Home extends Component{
     }
     renderContent = tab =>{
         if(tab.key == 1){
-            return (<div style={style}>zujian1</div>)
+            return (<div style={{height: document.documentElement.clientHeight - 251, backgroundColor: '#fff' ,marginBottom:'68px'}}>
+                    <Recommend  ></Recommend>
+                </div>
+
+            )
         }
         if(tab.key == 2){
             return (<div style={style}><Hot_song/></div>)
@@ -49,7 +54,7 @@ class Home extends Component{
 
 
         return(
-            <div className="main-container">
+            <div className="main-container" style={{height: 'cale( 100% - 64px )'}}>
                 <Flex>
                     <Flex.Item className={'header'}>
                         <Header>
@@ -62,26 +67,29 @@ class Home extends Component{
 
                 </Flex>
 
-                <Flex className={'toobars'}>
+                <Flex className={'toobars'} >
                     <Flex.Item>
                         <Tabs tabs={tabs}
                               initialPage={1}
                               onChange={(tab, index) => { console.log('onChange', index, tab); }}
-                              onTabClick={(tab, index) => {  }}
+                              onTabClick={(tab, index) => {  }  }
+
+                              className='tab'
                         >
                             {this.renderContent}
                         </Tabs>
 
 
-                        <Route
-                            path={match.url}
-                            render={props => <div>test1</div>}
-                            exact
-                        />
-                        <Route
-                            path={`${match.url}/user`}
-                            component={user}
-                        />
+
+                        {/*<Route*/}
+                        {/*    path={match.url}*/}
+                        {/*    render={props => <div>test1</div>}*/}
+                        {/*    exact*/}
+                        {/*/>*/}
+                        {/*<Route*/}
+                        {/*    path={`${match.url}/user`}*/}
+                        {/*    component={user}*/}
+                        {/*/>*/}
 
                     </Flex.Item>
 

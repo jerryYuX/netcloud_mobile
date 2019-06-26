@@ -102,10 +102,17 @@ class SearchContainer extends React.Component{
   }
   componentDidMount() {
     getHotSearch().then((res)=>{
-      console.log(res.result)
+      console.log(document.documentElement.clientHeight,
+        document.querySelector('[role="tablist"]').clientHeight,
+        document.querySelector('.header').clientHeight,
+        document.querySelector('.aplayer-body').clientHeight)
       this.setState({
         list:res.result.hots,
-        height:document.querySelector('.page').clientHeight-document.querySelector('.top').clientHeight
+        height:document.documentElement.clientHeight
+        -document.querySelector('[role="tablist"]').clientHeight
+        -document.querySelector('.top').clientHeight
+        -document.querySelector('.header').clientHeight
+        -document.querySelector('.aplayer-body').clientHeight
       })
     })
   }
