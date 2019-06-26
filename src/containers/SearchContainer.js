@@ -1,66 +1,73 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import MySearchBar from '../components/search/MySearchBar'
-import {queryAction} from '../store/action'
-
+import HotSearch from '../components/hotSearch/HotSearch'
+import {queryAction,clearSearchAction} from '../store/action'
+import {getHotSearch} from '../api/hotSeatch'
+import './SearchContainer.css'
 // class SearchBarExample extends React.Component {
 //   render({ query, clear, search }) {
     
 //    }
 // }
-const SearchBarExample =({ query, clear, search }) => (
-  <div class="page">
-      <div class="top">
+const SearchBarExample =({ query,list,handleClick, clear, search }) => (
+  <div className="page">
+      <div className="top">
            <MySearchBar query={query} onClear={clear} onChange={search}></MySearchBar>
       </div>
-      <div class="bottom">
-           
+      <div className="bottom">
+           <HotSearch list={list} handleClick={handleClick}></HotSearch>
       </div>
   </div>
 );
 const mapStateToProps=(state)=>{
-  console.log(state)
   return {
-    query:state.search.query
+    query:state.search.query,
+    list:[]
   }
 }
 const search = (value)=>(dispatch, getState) =>{
-  console.log(value,dispatch, getState)
   dispatch(queryAction(value))
   // dispatch({
   // })
 }
-function clear(){
-
+const handleClick=(val)=>(dispatch,getState)=>{
+  console.log(val)
 }
+const clear=()=>(dispatch, getState) =>{
+  dispatch(clearSearchAction())
+}
+
+class SearchContainer extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {list:[]};
+  }
+  componentDidMount() {
+    getHotSearch().then((res)=>{
+      console.log(res.result)
+      this.setState({
+        list:res.result.hots
+      })
+    })
+  }
+  render(){
+    const { query,list,handleClick, clear, search } = this.props
+    
+    return (
+      <div className="page">
+          <div className="top">
+              <MySearchBar query={query} onClear={clear} onChange={search}></MySearchBar>
+          </div>
+          <div className="bottom">
+              <HotSearch list={this.state.list} handleClick={handleClick}></HotSearch>
+          </div>
+      </div>
+    )
+  }
+}
+
 export default connect(
   mapStateToProps,
   { search,clear }
-)(SearchBarExample)
-// const SearchContainer= (state)=>{
-//     return (
-//         <div class="tabctitem">
-//             <div class="m-hmsrch">
-//                 <form class="m-input f-bd f-bd-btm" method="get" action="#">
-//                 <div class="inputcover">
-//                 <i class="u-svg u-svg-srch"></i>
-//                 <input type="search" name="search" class="input" placeholder="" autocomplete="off" value="" />
-//                 <label class="holder">搜索歌曲、歌手、专辑</label>
-//                 <figure class="close">
-//                 <i class="u-svg u-svg-empty"></i>
-//                 </figure>
-//                 </div>
-//                 </form>
-//                 <div class="m-default">
-//                 <section class="m-hotlist">
-//                 <h3 class="title">热门搜索</h3>
-//                 <ul class="list">
-//                 <li class="item f-bd f-bd-full"><a class="link" href="javascript:void(0);">远东韵律张碧晨</a></li>
-//                 </ul>
-//                 </section>
-//                 </div>
-//             </div>
-//          </div>
-//     );
-// }
-
+)(SearchContainer)

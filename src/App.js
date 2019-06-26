@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
       <div className="App">
-        {/* <SearchBarExample></SearchBarExample> */}
+        <SearchBarExample></SearchBarExample>
         
       </div>
       <Router>

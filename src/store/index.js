@@ -1,5 +1,6 @@
 import { createStore, combineReducers ,applyMiddleware} from 'redux'
 import {loginAction,saveLoginInfoAction} from './action.js'
+import * as actions from './action'
 import thunk from 'redux-thunk'
 const middleware = [ thunk ];
 // function visibilityFilter(state = 'SHOW_ALL', action) {
@@ -22,9 +23,13 @@ function login(state = {}, action) {
 
   function search(state="",action){
     switch(action.type){
-      case "SEARCH_QUERY":
+      case actions.SEARCH_QUERY:
       return Object.assign({},state,{
         query:action.query
+      })
+      case actions.CLEAR_SEARCH_ACTION:
+      return Object.assign({},state,{
+        query:""
       })
       default:
       return state

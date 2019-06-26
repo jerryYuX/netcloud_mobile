@@ -5,10 +5,9 @@ import { SearchBar, Button, WhiteSpace, WingBlank } from 'antd-mobile';
 const MySearchBar=({query,onChange,onClear})=>{
     return (
         <div>
-              <WingBlank><div className="sub-title">Normal</div></WingBlank>
-              <SearchBar value={query} placeholder="Search" maxLength={8} onClear={onClear} onChange={onChange} />
-              <WhiteSpace />
-          </div>
+            <WhiteSpace size="lg"/>
+            <SearchBar value={query} placeholder="Search" maxLength={8} onClear={onClear} onChange={onChange} />
+        </div>
     )
 }
 
