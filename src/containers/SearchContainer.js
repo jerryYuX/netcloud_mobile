@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { css } from '@emotion/core';
 import MySearchBar from '../components/search/MySearchBar'
 import HotSearch from '../components/hotSearch/HotSearch'
 import Msgitem from '../components/common/Msgitem'
@@ -12,7 +13,7 @@ import {
 } from '../store/action'
 import {getHotSearch,searchResult} from '../api/hotSeatch'
 import { PullToRefresh } from 'antd-mobile';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import { ScaleLoader } from 'react-spinners';
 import './SearchContainer.css'
 // class SearchBarExample extends React.Component {
 //   render({ query, clear, search }) {
@@ -92,24 +93,28 @@ const ETL =(datas)=>{
   }
   return []
 }
+const style=css`
+    margin-left:${document.documentElement.clientWidth/2-20}px
+`;
 class SearchContainer extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
       list:[],
-      height:0
+      height:0,
+      width:0
     };
   }
   componentDidMount() {
     getHotSearch().then((res)=>{
-      console.log(document.documentElement)
+
       this.setState({
         list:res.result.hots,
         height:document.documentElement.clientHeight
         -document.querySelector('[role="tablist"]').clientHeight
         -document.querySelector('.top').clientHeight
         -document.querySelector('.header').clientHeight
-        -document.querySelector('.aplayer-body').clientHeight
+        -document.querySelector('.aplayer-body').clientHeight,
       })
     })
   }
@@ -129,14 +134,16 @@ class SearchContainer extends React.Component{
                     return (<Msgitem key={item.id} data={item} clickHandle={(e)=>{console.log(e)}}></Msgitem>)
                   })}
                 </div>
+
               </PullToRefresh>
               <div className={noresult?"show":"hidden"}>
                 <div className="noresult">
                   <span>暂无搜索结果</span>
                 </div>
               </div>
-              <div className="loading"><ScaleLoader color={'#d43c33'} loading={loading}></ScaleLoader></div>
+
           </div>
+          <div className="loading"><ScaleLoader css={style} color={'#d43c33'} loading={loading}></ScaleLoader></div>
       </div>
     )
   }
