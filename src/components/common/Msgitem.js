@@ -32,7 +32,7 @@ export default class Msgitem extends React.Component {
       order = <div 
         className='msg-item-l msg-float'
         style={{
-          color: `${order<3 ? '#df3436' : '#999'}`
+          color: `${data.order<3 ? '#df3436' : '#999'}`
         }}
         >
         {
