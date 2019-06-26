@@ -11,12 +11,7 @@ import 'antd-mobile/dist/antd-mobile.css';
 
 function App() {
   return (
-    <div style={{height:'100%'}}>
-      {/*<div className="App">*/}
-      {/*  /!* <SearchBarExample></SearchBarExample> *!/*/}
-
-      {/*</div>*/}
-
+    <div className={'App'}>
       <Router>
           <Switch>
               <Route exact path="/" component={Home} />

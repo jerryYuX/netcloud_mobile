@@ -16,8 +16,8 @@ const tabs = [
     { title: <Badge text={'今日(20)'}>热歌榜</Badge>,key:2 },
     { title: <Badge dot>搜索</Badge>,key:3 },
 ];
-
-const style = { height: document.documentElement.clientHeight - 249, backgroundColor: '#fff' ,marginBottom:'68px'}
+const playerContext = React.createContext('light');
+const style = { height: document.documentElement.clientHeight - 165, backgroundColor: '#fff' }
 
 class Home extends Component{
     static contextTypes = {
@@ -25,7 +25,7 @@ class Home extends Component{
     }
     renderContent = tab =>{
         if(tab.key == 1){
-            return (<div style={{height: document.documentElement.clientHeight - 251, backgroundColor: '#fff' ,marginBottom:'68px'}}>
+            return (<div style={{style}}>
                     <Recommend  ></Recommend>
                 </div>
 
@@ -44,7 +44,7 @@ class Home extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            audio:{}
+            audio:[]
         };
 
     }
@@ -53,53 +53,43 @@ class Home extends Component{
 
 
         return(
-            <div className="main-container" style={{height: 'cale( 100% - 64px )'}}>
-                <Flex>
-                    <Flex.Item className={'header'}>
-                        <Header>
-
-                        </Header>
-
-
-
-                    </Flex.Item>
-
-                </Flex>
-
-                <Flex className={'toobars'} >
-                    <Flex.Item>
-                        <Tabs tabs={tabs}
-                              initialPage={1}
-                              onChange={(tab, index) => { console.log('onChange', index, tab); }}
-                              onTabClick={(tab, index) => {  }  }
-
-                              className='tab'
-                        >
-                            {this.renderContent}
-                        </Tabs>
+            <div className="main_container" >
+                <Header className={'Header'} />
+                <Tabs tabs={tabs}
+                      initialPage={1}
+                      onChange={(tab, index) => { console.log('onChange', index, tab); }}
+                      onTabClick={(tab, index) => {  }  }
+                      tabBarActiveTextColor={'#d43c33'}
+                      tabBarUnderlineStyle={{textDecorationColor:'#d43c33'}}
+                      style={{marginTop: '64px'}}
+                >
+                    {this.renderContent}
+                </Tabs>
+                <Aplayer audio={this.state.audio} />
 
 
 
-                        {/*<Route*/}
-                        {/*    path={match.url}*/}
-                        {/*    render={props => <div>test1</div>}*/}
-                        {/*    exact*/}
-                        {/*/>*/}
-                        {/*<Route*/}
-                        {/*    path={`${match.url}/user`}*/}
-                        {/*    component={user}*/}
-                        {/*/>*/}
 
-                    </Flex.Item>
 
-                </Flex>
-                <Aplayer audio={this.state.audio}/>
+
 
 
 
             </div>
 
         )
+
+    }
+    play_music(arr){
+        this.setState({
+            audio:arr,
+        })
+
+
+
+    }
+    componentDidMount(){
+        console.log(this.state);
     }
 
 
