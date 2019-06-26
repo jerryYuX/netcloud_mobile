@@ -7,6 +7,7 @@ import Login from './components/login/login'
 import SearchBarExample from './containers/SearchContainer' 
 // ant-ui　try
 import 'antd-mobile/dist/antd-mobile.css';
+import Recommend from './components/recommend/index';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <SearchBarExample></SearchBarExample>
         
       </div>
+      <Recommend></Recommend>
       <Router>
           <Switch>
               <Route exact path="/" component={Home} />

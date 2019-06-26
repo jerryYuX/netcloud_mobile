@@ -1,0 +1,32 @@
+
+    
+.remd-wrap {
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+.remd-wrap .remd-title {
+  position: relative;
+  padding-left: 9px;
+  margin-bottom: 14px;
+  font-size: 17px;
+  height: 20px;
+  line-height: 20px;
+  color: rgb(51, 51, 51);
+  font-weight: 400;
+}
+.remd-wrap .remd-title::after {
+  content: " ";
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  top: 50%;
+  margin-top: -9px;
+  width: 2px;
+  height: 16px;
+  background-color: #d33a31;
+}
+
+.new-music-wrap {
+  margin-top: 20px;
+}

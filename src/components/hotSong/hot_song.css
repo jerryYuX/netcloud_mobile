@@ -1,0 +1,44 @@
+.hotop {
+    position: relative;
+    /*border: 1px solid black ;*/
+    padding-top: 38.9%;
+    overflow: hidden;
+    background: url(../../assets/hot_music_bg.jpg) no-repeat;
+    background-size: contain;
+
+    /*width: 100%;*/
+}
+.hotopct {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+.u-hmsprt {
+    background: url(../../assets/w_icon.png) no-repeat;
+    background-size: 166px 97px;
+    width: 142px;
+    height: 67px;
+    background-position: -24px -30px;
+}
+.hottime {
+    margin-top: 10px;
+    color: hsla(0,0%,100%,.8);
+    font-size: 12px;
+    -webkit-transform: scale(.91);
+    -ms-transform: scale(.91);
+    transform: scale(.91);
+    -webkit-transform-origin: left top;
+    -ms-transform-origin: left top;
+    transform-origin: left top;
+}

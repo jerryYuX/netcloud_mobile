@@ -2,16 +2,18 @@
   margin: -10px 0;
   padding-left: 10px !important;
 }
-.icon {
-  background: url(//s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28…=) no-repeat;
-  background-size: 166px 97px;
-  display: inline-block;
-}
 .msg-float {
   float: left;
 }
 .msg-item-l {
   margin-right: 10px;
+}
+
+.icon {
+  background: url(//s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28…=) no-repeat;
+  background-size: 166px 97px;
+  display: inline-block;
+  margin-right: 3px;
 }
 .play-icon {
   width: 22px;
