@@ -1,45 +1,67 @@
 import React, { Component } from "react";
 import ReactAplayer from 'react-aplayer';
-function Aplay(props) {
-    let m_props = {
-        theme: '#F57F17',
-        lrcType: 3,
-        fixed: true,
-        audio: [
-            {
-                name: '光るなら',
-                artist: 'Goose house',
-                url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
-                cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
-                lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
-                theme: '#ebd0c2'
-            }
-        ]
-    };
-    let ap;
-    let onPlay = () => {
-        console.log('on play');
-    };
 
-    let onPause = () => {
-        console.log('on pause');
-    };
+import 'APlayer/dist/APlayer.min.css';
+import APlayer from 'APlayer';
 
-    // example of access aplayer instance
-    // let onInit = ap => {
-    //     this.ap = ap;
-    // };
-    return (
-        <div>
-        <ReactAplayer
-            {...m_props}
+class Aplay extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            audio:{}
+        };
 
-            onPlay={onPlay}
-            onPause={onPause}
-            // style={'height:300px'}
-        />
+    }
+    render() {
+        return (
+            <div id={'player'}>
 
-    </div>)
+            </div>
+        )
+    }
+    changePlayer(){
+        this.ap.list.add(this.props.audio);
+    }
+    componentDidMount() {
+        let player = document.getElementById('player');
+        let options = {
+            container: player,
+            mini: false,
+            autoplay: false,
+            theme: '#FADFA3',
+            loop: 'all',
+            order: 'random',
+            preload: 'auto',
+            volume: 0.7,
+            fixed: true,
+            listFolded: false,
+            listMaxHeight: 90,
+            lrcType: 3,
+            audio: [
+                {
+                    name: 'name1',
+                    artist: 'artist1',
+                    url: 'url1.mp3',
+                    cover: 'cover1.jpg',
+                    lrc: 'lrc1.lrc',
+                    theme: '#ebd0c2'
+                },
+                {
+                    name: 'name2',
+                    artist: 'artist2',
+                    url: 'url2.mp3',
+                    cover: 'cover2.jpg',
+                    lrc: 'lrc2.lrc',
+                    theme: '#46718b'
+                }
+            ]
+        }
+        this.ap = new APlayer(options);
+    }
+
+
 
 }
+
+
 export default Aplay;
