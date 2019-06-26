@@ -23,7 +23,45 @@
 .remd-item .remd-img-wrap {
   width: 100%;
 }
-.remd-item .remd-text {
+.remd-text-wrap {
+  height: 40px;
+  line-height: 20px;
+  overflow: hidden;
+}
+
+.remd-text-wrap .remd-text {
+  float: right;
+  margin-left: -5px;
+  width: 100%;
+  word-break: break-all;
+  padding: 0 6px;
+}
+
+.remd-text-wrap::before {
+  float: left;
+  width: 5px;
+  content: '';
+  height: 40px;
+}
+
+.remd-text-wrap::after {
+  float: right;
+  content: "...";
+  height: 20px;
+  line-height: 20px;
+  /* 为三个省略号的宽度 */
+  width: 2em;
+  /* 使盒子不占位置 */
+  margin-left: -2em;
+  /* 移动省略号位置 */
+  position: relative;
+  left: 100%;
+  top: -20px;
+  padding-right: 1px;
+  background-color: #FFF;
+}
+
+/*.remd-text {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -32,6 +70,4 @@
   min-height: 30px;
   line-height: 1.2;
   font-size: 13px;
-}
-.remd-item .remd-text span {
-}
+}*/
