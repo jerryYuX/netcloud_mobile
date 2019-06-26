@@ -16,7 +16,7 @@ export default class Recommend extends React.Component {
     this.fetchNewSon();
     this.fetchRemdListData();
   }
-  
+
   fetchNewSon() {
     getNewSong().then((data) => {
       if(data.code === 200) {
@@ -29,17 +29,17 @@ export default class Recommend extends React.Component {
               albumName: item.song.name,
               id: item.song.id,
             };
-            return <Msgitem 
-              data={data} 
+            return <Msgitem
+              data={data}
               key={idx}
               clickHandle={function(){console.log(this)}}
               ></Msgitem>
-          })    
+          })
         })
       }
     })
   }
-  
+
   fetchRemdListData() {
     getRemdListData().then((data) => {
       if(data.code === 200) {
@@ -49,19 +49,19 @@ export default class Recommend extends React.Component {
       }
     })
   }
-  
-  
+
+
   render() {
     return (
       <div className="remd-wrap">
         {/* 推荐音乐 */}
-        <div className="remd-wrap">
+        <div className="remd-music-wrap">
           <h2 className="remd-title">推荐歌单</h2>
           <div className="remd-list">
             <Remdlist data={this.state.remdListData}></Remdlist>
           </div>
         </div>
-        
+
         {/* 最新音乐 */}
         <div className="new-music-wrap">
           <h2 className="remd-title">最新音乐</h2>
@@ -70,6 +70,6 @@ export default class Recommend extends React.Component {
           </div>
         </div>
       </div>
-    )  
+    )
   }
 }
