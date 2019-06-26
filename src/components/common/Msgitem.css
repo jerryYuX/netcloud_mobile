@@ -1,12 +1,17 @@
 .msg-item {
   margin: -10px 0;
-  padding-left: 10px !important;
+  padding-left: 8px !important;
+  position: relative;
 }
 .msg-float {
   float: left;
+  height: 100%;
 }
 .msg-item-l {
-  margin-right: 10px;
+  margin-right: 20px;
+  width: 10px;
+  min-height: 44px;
+  line-height: 44px;
 }
 
 .icon {
@@ -14,6 +19,12 @@
   background-size: 166px 97px;
   display: inline-block;
   margin-right: 3px;
+}
+.am-list-extra {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  transform: translateY(100%);
 }
 .play-icon {
   width: 22px;

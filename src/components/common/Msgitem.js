@@ -2,7 +2,7 @@ import React from 'react';
 import { List } from 'antd-mobile';
 import './Msgitem.css';
 
-const playIcon = <i className='icon play-icon'></i>
+const playIcon = <i className='icon play-icon' style={{width: '40px'}}></i>
 
 const sgIcon = <i className='icon sg-icon'></i>
 
@@ -29,7 +29,19 @@ export default class Msgitem extends React.Component {
     let data = this.props.data;
     let order = '';
     if(data.order) {
-      order = <div className='msg-item-l msg-float'>{data.order}</div>
+      order = <div 
+        className='msg-item-l msg-float'
+        style={{
+          color: `${order<3 ? '#df3436' : '#999'}`
+        }}
+        >
+        {
+          String(data.order).replace(/^\d{1}$/, (val) => { 
+              return '0' + val; 
+            }
+          )
+        }
+      </div>
     }
     return (
       <List.Item
