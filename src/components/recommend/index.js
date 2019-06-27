@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import Remdlist from './Remdlist';
-import Msgitem from '../common/Msgitem';
+import MsgitemContainer from '../../containers/MsgitemContainer';
 import { getNewSong, getRemdListData } from '../../api/recommend';
 
 export default class Recommend extends React.Component {
@@ -44,18 +44,20 @@ export default class Recommend extends React.Component {
     if( this.state.newSongList ) {
       newSL = this.state.newSongList.map((item, idx, arr)=> {
         // mark
+        let song = item.song;
         let data = {
-          musicName: item.song.name,
-          singerName: item.song.artists[0].name,
-          albumName: item.song.name,
-          id: item.song.id,
+          id: song.id,
+          musicName: song.name,
+          singerName: song.artists[0].name,
+          albumName: song.album.name,
+          cover: song.artists[0].picUrl,
         };
-        return <Msgitem 
-          data={data} 
+        return <MsgitemContainer
+          data={data}
           key={idx}
           clickHandle={clickHandle}
-          ></Msgitem>
-      }) 
+          ></MsgitemContainer>
+      })
     }
 
     return (

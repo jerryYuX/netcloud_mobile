@@ -1,45 +1,86 @@
 import React from 'react';
 import { List } from 'antd-mobile';
 import './Msgitem.css';
+import { getMusicUrl, getMusicLrc } from '../../api/msgItem'
 
 const playIcon = <i className='icon play-icon' style={{width: '40px'}}></i>
 
 const sgIcon = <i className='icon sg-icon'></i>
-
 /**
  * 音乐ｉｔｅｍ
  (1) * 传入data
  {
-   musicName,
-   singerName,
-   albumName,
    id,
    order,
+   albumName,
+
+   musicName,
+   singerName,
+   url,
+   cover,
+   lrc,
+   theme
  };
  (2) clickHandle
  */
+/*  *  name: 'name1', // 革命
+  artist: 'artist1', // 歌手
+  url: '',// 歌
+  cover: '', // 图被骗
+  lrc: '', // 歌词
+  theme: '#ebd0c2' // 主题*/
 export default class Msgitem extends React.Component {
   constructor(props) {
     super(props);
-    this.clickHandle = props.clickHandle ? props.clickHandle :(function(){});
+    this.state = {
+      data: props.data,
+    }
+    this.clickHandle = this.clickHandle.bind(this);
   }
-  
-  
+
+  componentDidMount() {
+  }
+
+  clickHandle() {
+    console.log(this.props)
+    let data = this.props.data,
+      musicInfo = {
+        name: data.musicName,
+        artist: data.singerName,
+        cover: data.cover,
+        theme: 'black',
+        url: '',
+        lrc: '',
+      },
+      id = this.state.data.id,
+      ProUrl = getMusicUrl(id).then((res) => {
+        musicInfo.url = res.data[0].url;
+      }),
+      ProLrc = getMusicLrc(id).then((res) => {
+        musicInfo.lrc = res.lrc.lyric;
+      });
+
+    Promise.all([ProUrl, ProLrc]).then(() => {
+      console.log('改变', musicInfo);
+      this.props.addPlayList([musicInfo]);
+    })
+  }
+
   render() {
-    let data = this.props.data;
-    let order = '';
+    let { musicName, singerName, albumName, id, order, } = this.state.data;
+    let orderWrap = '';
     let msgFlotRWidth = 'calc(100% - 45px)';
-    if(data.order) {
+    if(order) {
       msgFlotRWidth = 'calc(100% - 85px)';
-      order = <div 
+      orderWrap = <div
         className='msg-item-l msg-float'
         style={{
-          color: `${data.order<3 ? '#df3436' : '#999'}`
+          color: `${order<3 ? '#df3436' : '#999'}`
         }}
         >
         {
-          String(data.order).replace(/^\d{1}$/, (val) => { 
-              return '0' + val; 
+          String(order).replace(/^\d{1}$/, (val) => {
+              return '0' + val;
             }
           )
         }
@@ -48,16 +89,16 @@ export default class Msgitem extends React.Component {
     return (
       <List.Item
         multipleLine
-        onClick={this.clickHandle.bind(this)}
+        onClick={this.clickHandle}
         extra={ playIcon }
         className="msg-item"
         activeStyle={false}
       >
-        {order}
+        {orderWrap}
         <div className='msg-item-r msg-float' style={{width: msgFlotRWidth}}>
-          <span className='music-name'>{data.musicName}</span>
+          <span className='music-name'>{musicName}</span>
           <List.Item.Brief style={{fontSize: '12px', marginTop: 0}}>
-            {sgIcon}{`${data.singerName} - ${data.albumName}`}
+            {sgIcon}{`${singerName} - ${albumName}`}
           </List.Item.Brief>
         </div>
       </List.Item>

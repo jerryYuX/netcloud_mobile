@@ -79,6 +79,7 @@ const increaseUpdate=()=>(dispatch, getState)=>{
   })
 
 }
+
 const ETL =(datas)=>{
   if(datas){
     return datas.map(data=>{
