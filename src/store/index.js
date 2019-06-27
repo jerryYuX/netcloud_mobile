@@ -97,8 +97,6 @@ let initListState={
     }
   }
   function list(state=initListState,action){
-    console.log(action)
-
     switch (action.type) {
       case actions.ADD_LIST:
         return Object.assign({},state,{
@@ -106,7 +104,6 @@ let initListState={
         })
       default:
         return state;
-
     }
 
   }

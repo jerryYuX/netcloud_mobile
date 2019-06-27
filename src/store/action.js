@@ -35,8 +35,8 @@ let increaseUpdateSearchAction=(result,limit,offset)=>{
 
 let addListAction = (lists)=>{
     return {
-        type:ADD_LIST,
-        list:lists
+      type:ADD_LIST,
+      list:lists
     }
 }
 export {
