@@ -1,5 +1,5 @@
 import React from 'react';
-import { List } from 'antd-mobile';
+import { List, Toast } from 'antd-mobile';
 import './Msgitem.css';
 import { getMusicUrl, getMusicLrc, getMusicPic } from '../../api/msgItem'
 
@@ -57,16 +57,22 @@ export default class Msgitem extends React.Component {
       }),
       ProLrc = getMusicLrc(id).then((res) => {
         musicInfo.lrc = res.lrc.lyric;
-      }),ProPic = getMusicPic(id).then( (res) => {
+      }),
+      ProPic = getMusicPic(id).then( (res) => {
         musicInfo.cover = res.songs[0].al.picUrl;
       });
 
-    Promise.all([ProUrl, ProLrc]).then(() => {
+    Promise.all([ProUrl, ProLrc, ProPic]).then(() => {
       this.props.toggleLoading(false);
       this.props.addPlayList([musicInfo]);
+    }).catch(() => {
+      this.showToast();
     })
   }
 
+  showToast() {
+    Toast.info('发生未知错误！', 1);
+  }
   render() {
     let { musicName, singerName, albumName, id, order, } = this.state.data;
     let orderWrap = '';
