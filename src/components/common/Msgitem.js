@@ -48,7 +48,7 @@ export default class Msgitem extends React.Component {
         name: data.musicName,
         artist: data.singerName,
         cover: data.cover,
-        theme: 'black',
+        // theme: 'black',
         url: '',
         lrc: '',
       },
