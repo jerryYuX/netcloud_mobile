@@ -15,6 +15,7 @@ const mapStateToProps=(state)=>{
 //数据修改，修改仓库数据函数
 const clearList=()=>(dispatch, getState)=>{
     let state=getState();
+    console.log(1)
     let list = [];
 
     dispatch(addListAction(list))
@@ -27,12 +28,12 @@ class PlayerContainer extends Component{
 
     }
     render() {
-        const { list } = this.props
+        const { list ,clearList} = this.props
         console.log(this.props)
         return(
             <div>
                 <Aplayer audio={list}/>
-                {/*<button onClick={clearList}></button>*/}
+                {/*<button onClick={clearList}>test</button>*/}
 
             </div>
         )
