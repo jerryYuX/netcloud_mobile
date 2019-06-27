@@ -7,12 +7,14 @@ import APlayer from 'APlayer';
 class Aplay extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             audio:{}
         };
 
     }
     render() {
+
         return (
             <div id={'player'}>
 
@@ -26,7 +28,7 @@ class Aplay extends Component {
         let player = document.getElementById('player');
         let options = {
             container: player,
-            mini: false,
+            mini: true,
             autoplay: false,
             theme: '#FADFA3',
             loop: 'all',
@@ -34,9 +36,9 @@ class Aplay extends Component {
             preload: 'auto',
             volume: 0.7,
             fixed: true,
-            listFolded: false,
+            listFolded: true,
             listMaxHeight: 90,
-            lrcType: 3,
+            lrcType: 1,
             audio: [
 
             ]
@@ -44,11 +46,16 @@ class Aplay extends Component {
         // options.audio = this.props.audio;
         this.ap = new APlayer(options);
 
+
         this.ap.list.add(this.props.audio);
 
 
     }
-
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(this.props);
+        this.ap.list.add(this.props.audio);
+        this.ap.play();
+    }
 
 
 }
