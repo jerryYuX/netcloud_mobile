@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { css } from '@emotion/core';
 import MySearchBar from '../components/search/MySearchBar'
 import HotSearch from '../components/hotSearch/HotSearch'
-import Msgitem from '../components/common/Msgitem'
+import Msgitem from './MsgitemContainer'
 import {
   queryAction,
   clearSearchAction,
@@ -75,7 +75,9 @@ const increaseUpdate=()=>(dispatch, getState)=>{
   let limit=state.search.limit;
   let offset=state.search.offset+limit;
   searchResult(value,limit,offset).then(res=>{
-      dispatch(increaseUpdateSearchAction(res.result.songs,limit,offset))
+      if(state.search.result.length<res.result.songCount){
+        dispatch(increaseUpdateSearchAction(res.result.songs,limit,offset))
+      }
   })
 
 }
@@ -84,19 +86,24 @@ const ETL =(datas)=>{
   if(datas){
     return datas.map(data=>{
       let ETL_data={};
-      console.log(data)
-      ETL_data.musicName=data.name;
-      ETL_data.singerName=data.artists[0].name;
-      ETL_data.albumName=data.album.name;
-      ETL_data.id=data.id;
-      return ETL_data;
+      if(data){
+        ETL_data.musicName=data.name;
+        ETL_data.singerName=data.artists[0].name;
+        ETL_data.albumName=data.album.name;
+        ETL_data.id=data.id;
+        return ETL_data;
+      }
+      
     })
   }
   return []
 }
+const height=document.documentElement.clientHeight
 const style=css`
-    margin-left:${document.documentElement.clientWidth/2-20}px
+    margin-left:${document.documentElement.clientWidth/2-20}px;
+    margin-top:${height/2}px;
 `;
+
 class SearchContainer extends React.Component{
   constructor(props) {
     super(props);
@@ -108,7 +115,6 @@ class SearchContainer extends React.Component{
   }
   componentDidMount() {
     getHotSearch().then((res)=>{
-
       this.setState({
         list:res.result.hots,
         height:document.documentElement.clientHeight
@@ -132,7 +138,7 @@ class SearchContainer extends React.Component{
               <PullToRefresh style={{ height: this.state.height,overflow: 'auto',}} direction="up" onRefresh={increaseUpdate} className={searchFin?"show":"hidden"}>
                 <div className="listView">
                   {ETL(result).map(item=>{
-                    return (<Msgitem key={item.id} data={item} clickHandle={(e)=>{console.log(e)}}></Msgitem>)
+                    return (<Msgitem key={item.id} data={item} ></Msgitem>)
                   })}
                 </div>
 
@@ -142,7 +148,6 @@ class SearchContainer extends React.Component{
                   <span>暂无搜索结果</span>
                 </div>
               </div>
-
           </div>
           <div className="loading"><ScaleLoader css={style} color={'#d43c33'} loading={loading}></ScaleLoader></div>
       </div>
