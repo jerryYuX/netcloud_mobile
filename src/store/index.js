@@ -43,6 +43,9 @@ let initListState={
 
   ]
 };
+let initMsgitemState = {
+  clickLoading: false,
+}
   function search(state=initSearchState,action){
     switch(action.type){
       case actions.SEARCH_QUERY:
@@ -107,9 +110,19 @@ let initListState={
     }
 
   }
+  function msgitem (state=initMsgitemState, action) {
+    switch (action.type) {
+      case actions.STATE_TOGGLE:
+        return {
+          clickLoading: action.clickLoading
+        }
+      default:
+        return state;
+    }
+  }
 // 创建 Redux store 来存放应用的状态。
 // API 是 { subscribe, dispatch, getState }。
-let reducer=combineReducers({login,search,list})
+let reducer=combineReducers({login,search,list, msgitem})
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());
 }

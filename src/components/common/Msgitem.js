@@ -1,7 +1,7 @@
 import React from 'react';
 import { List } from 'antd-mobile';
 import './Msgitem.css';
-import { getMusicUrl, getMusicLrc } from '../../api/msgItem'
+import { getMusicUrl, getMusicLrc, getMusicPic } from '../../api/msgItem'
 
 const playIcon = <i className='icon play-icon' style={{width: '40px'}}></i>
 
@@ -42,13 +42,12 @@ export default class Msgitem extends React.Component {
   }
 
   clickHandle() {
-    console.log(this.props)
+    this.props.toggleLoading(true);
     let data = this.props.data,
       musicInfo = {
         name: data.musicName,
         artist: data.singerName,
         cover: data.cover,
-        theme: 'black',
         url: '',
         lrc: '',
       },
@@ -58,10 +57,12 @@ export default class Msgitem extends React.Component {
       }),
       ProLrc = getMusicLrc(id).then((res) => {
         musicInfo.lrc = res.lrc.lyric;
+      }),ProPic = getMusicPic(id).then( (res) => {
+        musicInfo.cover = res.songs[0].al.picUrl;
       });
 
     Promise.all([ProUrl, ProLrc]).then(() => {
-      console.log('改变', musicInfo);
+      this.props.toggleLoading(false);
       this.props.addPlayList([musicInfo]);
     })
   }
@@ -92,7 +93,7 @@ export default class Msgitem extends React.Component {
         onClick={this.clickHandle}
         extra={ playIcon }
         className="msg-item"
-        activeStyle={false}
+       /* activeStyle={false}*/
       >
         {orderWrap}
         <div className='msg-item-r msg-float' style={{width: msgFlotRWidth}}>
