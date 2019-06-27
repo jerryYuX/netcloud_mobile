@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './header.css';
 import { WhiteSpace ,Button} from 'antd-mobile';
+import { Link } from 'react-router-dom'
 function Header(props) {
     return (
         <div className={'header'}>
@@ -57,7 +58,7 @@ function Header(props) {
                         </g>
                     </g>
                 </svg>
-                <Button type="warning" className={'button_login'} inline size="small" >登录</Button>
+                <Link to={'/login'}><Button type="warning" className={'button_login'} inline size="small" >登录</Button></Link>
             </h1>
 
 
