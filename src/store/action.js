@@ -7,6 +7,7 @@ export const CLEAR_SEARCH_ACTION="CLEAR_SEARCH_ACTION"
 export const INCREASE_UPDATE_SEARCH="INCREASE_UPDATE_SEARCH"
 export const NO_RESULT="NO_RESULT"
 export const ADD_LIST="ADD_LIST"
+export const STATE_TOGGLE = "STATE_TOGGLE"
 let loginAction=user=>{
     return { type: LOGIN_ACTION ,user:user}
 }
@@ -39,6 +40,13 @@ let addListAction = (lists)=>{
       list:lists
     }
 }
+
+let toggleClickStateAction = (bool) => {
+    return {
+        type: STATE_TOGGLE,
+        clickLoading: bool,
+    }
+}
 export {
     loginAction,
     saveLoginInfoAction,
@@ -47,5 +55,6 @@ export {
     finSearchAction,
     increaseUpdateSearchAction,
     noResultAction,
-    addListAction
+    addListAction,
+  toggleClickStateAction,
 }
