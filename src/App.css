@@ -1,7 +1,10 @@
-
 .App{
     height: 100%;
 }
 html,body,#root{
     height: 100%;
+}
+
+.am-toast-text {
+    background: #dd2424 !important;
 }
