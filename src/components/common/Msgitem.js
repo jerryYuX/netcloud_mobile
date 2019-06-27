@@ -71,7 +71,7 @@ export default class Msgitem extends React.Component {
   }
 
   showToast() {
-    Toast.info('发生未知错误！', 1);
+    Toast.info('未知错误!', 1);
   }
   render() {
     let { musicName, singerName, albumName, id, order, } = this.state.data;
