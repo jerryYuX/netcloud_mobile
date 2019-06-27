@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import './hot_song.css'
-import Msgitem from '../common/Msgitem'
+import Msgitem from '../../containers/MsgitemContainer'
 import {get_hot_list} from '../../api/hot_song'
 
 class Hot_song extends Component {
