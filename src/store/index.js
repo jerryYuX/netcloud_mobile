@@ -97,7 +97,7 @@ let initListState={
     }
   }
   function list(state=initListState,action){
-    switch (action.Type) {
+    switch (action.type) {
       case actions.ADD_LIST:
         return Object.assign({},state,{
           list:action.list

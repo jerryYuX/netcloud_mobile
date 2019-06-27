@@ -44,11 +44,13 @@ export default class Recommend extends React.Component {
     if( this.state.newSongList ) {
       newSL = this.state.newSongList.map((item, idx, arr)=> {
         // mark
+        let song = item.song;
         let data = {
-          musicName: item.song.name,
-          singerName: item.song.artists[0].name,
-          albumName: item.song.name,
-          id: item.song.id,
+          id: song.id,
+          musicName: song.name,
+          singerName: song.artists[0].name,
+          albumName: song.album.name,
+          cover: song.artists[0].picUrl,
         };
         return <MsgitemContainer
           data={data}
