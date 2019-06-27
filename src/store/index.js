@@ -104,7 +104,6 @@ let initListState={
         })
       default:
         return state;
-
     }
 
   }

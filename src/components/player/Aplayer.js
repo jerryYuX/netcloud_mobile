@@ -13,6 +13,7 @@ class Aplay extends Component {
 
     }
     render() {
+        console.log()
         return (
             <div id={'player'}>
 
@@ -23,6 +24,7 @@ class Aplay extends Component {
         this.ap.list.add(this.props.audio);
     }
     componentDidMount() {
+        console.log()
         let player = document.getElementById('player');
         let options = {
             container: player,

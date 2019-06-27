@@ -21,25 +21,36 @@ const sgIcon = <i className='icon sg-icon'></i>
 export default class Msgitem extends React.Component {
   constructor(props) {
     super(props);
-    this.clickHandle = props.clickHandle ? props.clickHandle :(function(){});
   }
-  
-  
+
+  clickHandle() {
+    console.log('之后' + this.props)
+    this.props.addPlayList([
+      {
+        nzq: 'sds',
+      }
+    ]);
+  };
+
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   render() {
     let data = this.props.data;
     let order = '';
     let msgFlotRWidth = 'calc(100% - 45px)';
     if(data.order) {
       msgFlotRWidth = 'calc(100% - 85px)';
-      order = <div 
+      order = <div
         className='msg-item-l msg-float'
         style={{
           color: `${data.order<3 ? '#df3436' : '#999'}`
         }}
         >
         {
-          String(data.order).replace(/^\d{1}$/, (val) => { 
-              return '0' + val; 
+          String(data.order).replace(/^\d{1}$/, (val) => {
+              return '0' + val;
             }
           )
         }

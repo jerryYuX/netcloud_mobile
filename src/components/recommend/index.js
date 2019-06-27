@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import Remdlist from './Remdlist';
-import Msgitem from '../common/Msgitem';
+import MsgitemContainer from '../../containers/MsgitemContainer';
 import { getNewSong, getRemdListData } from '../../api/recommend';
 
 export default class Recommend extends React.Component {
@@ -50,12 +50,12 @@ export default class Recommend extends React.Component {
           albumName: item.song.name,
           id: item.song.id,
         };
-        return <Msgitem 
-          data={data} 
+        return <MsgitemContainer
+          data={data}
           key={idx}
           clickHandle={clickHandle}
-          ></Msgitem>
-      }) 
+          ></MsgitemContainer>
+      })
     }
 
     return (
