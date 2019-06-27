@@ -1,10 +1,15 @@
 import React from 'react';
-import './index.css';
+import { css } from '@emotion/core';
 import Remdlist from './Remdlist';
 import MsgitemContainer from '../../containers/MsgitemContainer';
 import { getNewSong, getRemdListData } from '../../api/recommend';
+import { ScaleLoader } from 'react-spinners';
+import { connect } from 'react-redux';
+import './index.css';
+import Msgitem from '../common/Msgitem'
+const style=css`margin-left:${document.documentElement.clientWidth/2-20}px`;
 
-export default class Recommend extends React.Component {
+class Recommend extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +43,9 @@ export default class Recommend extends React.Component {
   }
 
 
+
   render() {
+    console.log('remdddddddddddddddddcom', this.props)
     let newSL = [];
     let clickHandle = this.props.clickHandle ? this.props.clickHandle : (function(){})
     if( this.state.newSongList ) {
@@ -50,7 +57,6 @@ export default class Recommend extends React.Component {
           musicName: song.name,
           singerName: song.artists[0].name,
           albumName: song.album.name,
-          cover: song.artists[0].picUrl,
         };
         return <MsgitemContainer
           data={data}
@@ -78,7 +84,19 @@ export default class Recommend extends React.Component {
             { newSL }
           </div>
         </div>
+
+        <div className="msg-item-loading"><ScaleLoader css={style} color={'#d43c33'} loading={this.props.clickLoading}></ScaleLoader></div>
       </div>
     )
   }
 }
+
+const mapStateToProps=(state)=>{
+  return {
+    clickLoading: state.msgitem.clickLoading,
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(Recommend)
