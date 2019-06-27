@@ -72,7 +72,6 @@ let initMsgitemState = {
             noresult:false
           })
       case actions.INCREASE_UPDATE_SEARCH:
-        console.log(state,action)
         return Object.assign({},state,{
           loading:false,
           result:state.result.concat(action.result),

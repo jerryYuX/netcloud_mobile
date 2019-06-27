@@ -4,10 +4,7 @@
 }
 .loading{
     display: table!important;
-    margin:0 auto;
     height:100%;
-    position: absolute;
-    top:75%;
     transform: translateY(-50%);
 }
 .show{
