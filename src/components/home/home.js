@@ -68,14 +68,6 @@ class Home extends Component{
                 </Tabs>
                 <PlayerContainer audio={this.state.audio} />
 
-
-
-
-
-
-
-
-
             </div>
 
         )
@@ -90,7 +82,15 @@ class Home extends Component{
 
     }
     componentDidMount(){
-        console.log(this.state);
+
+        if(sessionStorage.getItem('first')){
+
+        }else{
+            sessionStorage.setItem('first','1');
+            window.location.reload();
+        }
+
+        // console.log(this.state);
     }
 
 

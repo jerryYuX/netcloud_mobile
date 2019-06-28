@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Toast } from 'antd-mobile';
 import './Msgitem.css';
 import { getMusicUrl, getMusicLrc, getMusicPic } from '../../api/msgItem'
-
+import Hammer from 'react-hammerjs'
 const playIcon = <i className='icon play-icon' style={{width: '40px'}}></i>
 
 const sgIcon = <i className='icon sg-icon'></i>
@@ -39,6 +39,10 @@ export default class Msgitem extends React.Component {
   }
 
   componentDidMount() {
+    // var hammertime = new Hammer(document.querySelector('.msg-item'), myOptions);
+    // hammertime.on('pan', function(ev) {
+    //   console.log(ev);
+    // });
   }
 
   clickHandle() {
@@ -96,7 +100,7 @@ export default class Msgitem extends React.Component {
     return (
       <List.Item
         multipleLine
-        onClick={this.clickHandle}
+        onTouchEnd={this.clickHandle}
         extra={ playIcon }
         className="msg-item"
        /* activeStyle={false}*/

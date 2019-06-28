@@ -8,6 +8,7 @@
     "react": "^16.8.6",
     "react-aplayer": "^1.0.0",
     "react-dom": "^16.8.6",
+    "react-hammerjs": "^1.0.1",
     "react-redux": "^7.1.0",
     "react-router": "^4.0.0",
     "react-router-config": "^5.0.1",

@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import ReactAplayer from 'react-aplayer';
-
 import 'APlayer/dist/APlayer.min.css';
 import APlayer from 'APlayer';
 
@@ -52,10 +50,10 @@ class Aplay extends Component {
 
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(this.props);
+
         this.ap.list.clear();
         this.ap.list.add(this.props.audio);
-        // this.ap.list.switch(2);
+
 
         this.ap.play();
     }

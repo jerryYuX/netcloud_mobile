@@ -58,7 +58,7 @@ function Header(props) {
                         </g>
                     </g>
                 </svg>
-                <Link to={'/login'}><Button type="warning" className={'button_login'} inline size="small" >登录</Button></Link>
+                <Link to={'/login'}  className="am-button button_login am-button-warning am-button-small am-button-inline">登录</Link>
             </h1>
 
 
